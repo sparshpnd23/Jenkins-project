@@ -28,11 +28,45 @@ In the Execute Shell Section, give the commands to copy the downloaded code to t
 *Step 3* : Create another Jenkins task for the Test Server. Any new code pushed to the dev1 branch should be automatically deployed to the testing server.
 ![](/images/test1.png)
 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
 In the execute shell section, give the commandds to copy the downloaded code to the test volume folder that is linked to the Testing Server Contrainer.
 ![](/images/test2.png)
 
 
+----------------------------------------------------------------------------------------------------------------------------------------
 
-*Step 4* : Our third Jenkins task is the most interesting one. As soon as the Quality & Assurance team successfully approves the code deployed on the test server, this third task would run that would automatically merge the two branches & deploy the tested code on the  main Production Server. The Production Server is exposed to the external world. In this project, I have used the concept og Tunnel to expose this server using ngrok software.
+
+*Step 4* : Our third Jenkins task is the most interesting one. As soon as the Quality & Assurance team successfully approves the code deployed on the test server, this third task would run that would automatically merge the two branches & deploy the tested code on the  main Production Server. The Production Server is exposed to the external world. In this project, I have used the concept of Tunnel to expose this server using ngrok software.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+In the third task, along with the repo link, we need to provide the GitHub ctredentials so that it is authenticated to merge the two branches on GitHub.
+![](/images/cred.png)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+After providing the credentials, we need to use the _**Merge Before Build**_ option and provide the name of the branches, so that it can merge the two branches together.
+![](/images/mbb.png)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+Use the _**Git Publisher**_ option to push after the merge has been done.
+![](/images/gp.png)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+Now, use the _**Post Build Option**_ to build the Production Task as well as the Testing task. Since the Braanches have been merged, the tested code would be deployed on the Production Server.
+![](/images/bop.png)
+
 
 Viola !! Our fully automated System is ready to use. 
